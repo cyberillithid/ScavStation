@@ -31,6 +31,7 @@
 	desc = "A few rags that wrap around the legs and crotch for a semblance of modesty."
 	bodytype_equip_flags = BODY_FLAG_YINGLET
 	icon = 'mods/valsalia/icons/clothing/under/loincloth.dmi'
+	yinglet_icon = null
 	color = COLOR_BEIGE
 	var/detail_color
 
@@ -146,11 +147,13 @@
 	bodytype_equip_flags = BODY_FLAG_YINGLET
 	icon = 'mods/valsalia/icons/clothing/suit/labcoat_yinglet.dmi'
 
+/obj/item/clothing/shoes/sandal
+	yinglet_icon = 'mods/valsalia/icons/clothing/shoes/sandals.dmi'
+
 /obj/item/clothing/shoes/sandal/yinglet
 	name = "small sandals"
 	desc = "A pair of rather plain wooden sandals. They seem to be the right size and shape for a yinglet."
 	bodytype_equip_flags = BODY_FLAG_YINGLET
-	icon = 'mods/valsalia/icons/clothing/shoes/sandals.dmi'
 
 /obj/item/clothing/accessory/tailglove
 	name = "yinglet tail glove"
@@ -236,29 +239,23 @@
 	bodytype_equip_flags = BODY_FLAG_YINGLET
 	icon = 'mods/valsalia/icons/clothing/suit/fancy_robe_yinglet.dmi'
 
-/obj/item/clothing/suit/radiation/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/suit/radsuit_yinglet.dmi')
+/obj/item/clothing/suit/radiation
+	yinglet_icon = 'mods/valsalia/icons/clothing/suit/radsuit_yinglet.dmi'
 
-/obj/item/clothing/head/radiation/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/head/radsuit_hood_yinglet.dmi')
+/obj/item/clothing/head/radiation
+	yinglet_icon = 'mods/valsalia/icons/clothing/head/radsuit_hood_yinglet.dmi'
 
-/obj/item/clothing/shoes/magboots/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/shoes/magboots.dmi')
+/obj/item/clothing/shoes/magboots
+	yinglet_icon = 'mods/valsalia/icons/clothing/shoes/magboots.dmi'
 
-/obj/item/clothing/suit/armor/bulletproof/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/suit/ballistic_vest.dmi')
+/obj/item/clothing/suit/armor/bulletproof
+	yinglet_icon = 'mods/valsalia/icons/clothing/suit/ballistic_vest.dmi'
 
-/obj/item/clothing/head/cakehat/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/head/cakehat.dmi')
+/obj/item/clothing/head/cakehat
+	yinglet_icon = 'mods/valsalia/icons/clothing/head/cakehat.dmi'
 
-/obj/item/clothing/suit/armor/hos/jensen/Initialize()
-	. = ..()
-	LAZYSET(sprite_sheets, BODYTYPE_YINGLET, 'mods/valsalia/icons/clothing/suit/jensen_yinglet.dmi')
+/obj/item/clothing/suit/armor/hos/jensen
+	yinglet_icon = 'mods/valsalia/icons/clothing/suit/jensen_yinglet.dmi'
 
 /obj/item/clothing/head/cakehat/get_mob_flame_overlay(var/image/overlay, var/bodytype)
 	var/image/I = ..()
@@ -266,7 +263,11 @@
 		I.pixel_y = 3
 	return I
 
+/obj/item/clothing/under/color
+	yinglet_icon = 'mods/valsalia/icons/clothing/under/jumpsuit.dmi'
+
 /obj/item/clothing/under/hazardjumpsuit/yinglet
 	name = "small hazard jumpsuit"
 	icon = 'mods/valsalia/icons/clothing/under/hazardjumpsuit_yinglet.dmi'
 	bodytype_equip_flags = BODY_FLAG_YINGLET
+	yinglet_icon = null

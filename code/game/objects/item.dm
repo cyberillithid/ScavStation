@@ -4,6 +4,7 @@
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	pass_flags = PASS_FLAG_TABLE
 	abstract_type = /obj/item
+	temperature_sensitive = TRUE
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
@@ -776,9 +777,14 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
 /obj/item/proc/on_active_hand()
-
-/obj/item/proc/has_embedded()
 	return
+
+/obj/item/proc/has_embedded(mob/living/victim)
+	if(istype(victim))
+		LAZYDISTINCTADD(victim.embedded, src)
+		victim.verbs |= /mob/proc/yank_out_object
+		return TRUE
+	return FALSE
 
 /obj/item/proc/get_pressure_weakness(pressure,zone)
 	. = 1
@@ -943,8 +949,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	SHOULD_CALL_PARENT(FALSE)
-	if(loaded_cell_type && accepted_cell_type)
-		set_extension(src, (power_supply_extension_type || /datum/extension/loaded_cell), accepted_cell_type, loaded_cell_type, charge_value)
+	if(loaded_cell_type || accepted_cell_type)
+		set_extension(src, (power_supply_extension_type || /datum/extension/loaded_cell), (accepted_cell_type || loaded_cell_type), loaded_cell_type, charge_value)
 
 /obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
 	return
@@ -954,3 +960,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	// delay for 1ds to allow the rest of the call stack to resolve
 	if(!QDELETED(src) && !QDELETED(user) && user.get_equipped_slot_for_item(src) == slot)
 		try_burn_wearer(user, slot, 1)
+
+/obj/item/can_embed()
+	return !anchored && !is_robot_module(src)

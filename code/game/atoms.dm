@@ -56,6 +56,9 @@
 	var/current_health
 	var/max_health
 
+	/// Does this atom respond to changes in local temperature via the `temperature` var?
+	var/temperature_sensitive = FALSE
+
 /atom/proc/get_max_health()
 	return max_health
 
@@ -86,6 +89,13 @@
 /atom/proc/remove_air(amount)
 	RETURN_TYPE(/datum/gas_mixture)
 	return null
+
+/**
+	Merge an exhaled air volume into air contents..
+*/
+/atom/proc/merge_exhaled_volume(datum/gas_mixture/exhaled)
+	var/datum/gas_mixture/environment = return_air()
+	environment?.merge(exhaled)
 
 /**
 	Get the air of this atom or its location's air

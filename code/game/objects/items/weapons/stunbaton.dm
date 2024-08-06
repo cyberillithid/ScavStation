@@ -37,7 +37,7 @@
 	return ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/high)
 
 /obj/item/baton/infinite/Initialize(var/ml, var/material_key, var/loaded_cell_type)
-	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/infinite)
+	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/infinite)
 	set_status(1, null)
 
 /obj/item/baton/proc/update_status()
@@ -168,7 +168,7 @@
 	if (R)
 		return ..()
 	else	// Stop pretending and get out of your cardborg suit, human.
-		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself..</span>")
+		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself.</span>")
 		add_fingerprint(user)
 	return 0
 
